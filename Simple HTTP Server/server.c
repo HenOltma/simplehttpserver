@@ -48,6 +48,28 @@ int main(int argc, char** argv) {
             sizeof(srv_addr)) < 0) {
         err_abort("Kann lokale Adresse nicht binden, laeuft fremder Server?");
     }
+    
+    // Warteschlange fuer TCP-Socket einrichten
+    listen(sockfd,5);
+    printf("TCP Echon-Server: bereit ..\n");
+    for(;;){
+        alen = sizeof(cli_addr);
+        // Verbindungsanfrage entgegen nehmen
+        newsockfd = accept(sockfd,(struct sockaddr *)&cli_addr, &alen);
+        if(newsockfd < 0){
+            err_abort("Fehler beim Verbindungsaufbau!");
+        }
+        //fuer jede Verbindung einen Kindprozess erzeugen
+        if (pid = fork()) < 0{
+            err_abort("Fehler beim Erzeugen eines Kindprozesses!");
+        } else if (pid == 0){
+            close (sockfd);
+            str_echo (newsockfd);
+            exit (0);
+        }
+        close ( newsockfd);
+        }
+    }
     return (EXIT_SUCCESS);
 }
 

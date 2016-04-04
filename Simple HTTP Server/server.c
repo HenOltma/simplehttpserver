@@ -25,7 +25,7 @@ void *memset (void *s, int c, size_t n);
 /*
  * 
  */
-int main(int argc, char** argv) {
+int mains(int argc, char** argv) {
     // Deskriptoren, Adresslaenge, Prozess-ID
     int sockfd, newsockfd, alen, pid;
     int reuse = 1;

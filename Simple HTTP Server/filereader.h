@@ -12,8 +12,15 @@
 extern "C" {
 #endif
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <dirent.h>
 
-
+char* docroot;
+    
+char* getFileType (char* filename);
+char* readFile (char* filename, char* path);
+void setDocroot (char* root);
 
 #ifdef	__cplusplus
 }

@@ -1,18 +1,40 @@
-#include <string.h>
-
 #include "filereader.h"
 
 int main(int argc, char** argv) {
-    
-    setDocroot("./");
+    getFileType("example.html");
     
     //readFile("")      HIER WEITERMACHEN
     
     return (EXIT_SUCCESS);
 }
-
-char* getFileType (char* filename) {
+/**
+ * Gibt die Dateiendung der Datei zurück.
+ * Dateiendungen mit Punkten werden nicht unterstützt!
+ * Dateinamen, die länger als 255 (CHARBUFF) sind werden nicht unterstützt!
+ * @param filename Der Name der Datei
+ * @return Die Dateiendung
+ */
+char* getFileType (const char* filename) {
+    char str[CHARBUFF]; 
+    const char delimiter[2] = ".";
+    char *token;
     
+    if (strlen(filename) > CHARBUFF) return;
+   
+    strcpy(str, filename);
+    
+    // Erster Abschnitt
+    token = strtok(str, delimiter);
+   
+    // Weitere Abschnitte durchlaufen
+    while(token != NULL) {
+        printf( " %s\n", token );
+    
+        token = strtok(NULL, delimiter);
+    }
+    
+    // Dateiendung ist nun in token gespeichert
+    return token;
 }
 
 char* readFile (char* filename, char* path) {

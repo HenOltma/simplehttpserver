@@ -15,10 +15,13 @@ extern "C" {
 #include <stdio.h>
 #include <stdlib.h>
 #include <dirent.h>
+#include <string.h>
 
+#define CHARBUFF 255
+    
 char* docroot;
     
-char* getFileType (char* filename);
+char* getFileType (const char* filename);
 char* readFile (char* filename, char* path);
 void setDocroot (char* root);
 

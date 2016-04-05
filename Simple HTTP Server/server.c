@@ -9,8 +9,10 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/socket.h>
-#include<netinet/in.h>
-#include<arpa/inet.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <unistd.h>
+
 #include "filereader.h"
 
 #define SRV_PORT 8998
@@ -60,15 +62,15 @@ int mains(int argc, char** argv) {
             err_abort("Fehler beim Verbindungsaufbau!");
         }
         //fuer jede Verbindung einen Kindprozess erzeugen
-        if (pid = fork()) < 0{
+        if ((pid = fork()) < 0) {
             err_abort("Fehler beim Erzeugen eines Kindprozesses!");
-        } else if (pid == 0){
+        } else if (pid == 0) {
             close (sockfd);
-            str_echo (newsockfd);
+            //str_echo (newsockfd);
             exit (0);
         }
-        close ( newsockfd);
-        }
+        close(newsockfd);
+        
     }
     return (EXIT_SUCCESS);
 }
